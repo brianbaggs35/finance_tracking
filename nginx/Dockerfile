@@ -1,7 +1,7 @@
-FROM nginx:1.27-alpine
+FROM nginxinc/nginx-unprivileged:stable-alpine
 
-# bash is needed for the entrypoint script
-RUN apk add --no-cache bash
+# bash for the entrypoint script, gettext for envsubst (variable substitution in templates)
+RUN apk add --no-cache bash gettext
 
 # Templates are baked into the image; runtime config lands on the shared volume
 COPY templates/ /templates/

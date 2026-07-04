@@ -42,8 +42,8 @@ services:
     build:
       context: ./nginx
     ports:
-      - "80:80"
-      - "443:443"
+      - "80:8080"
+      - "443:8443"
     volumes:
       - certs:/etc/letsencrypt
       - nginx_config:/etc/nginx/conf.d

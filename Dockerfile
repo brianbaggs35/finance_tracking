@@ -40,7 +40,7 @@ ENV RAILS_ENV="production" \
 # ── Build stage ──────────────────────────────────────────────────────────────
 FROM base AS build
 
-ARG NODE_MAJOR=22
+ARG NODE_MAJOR=24
 
 # Install build tools + Node.js (required for Vite asset compilation)
 RUN apt-get update -qq && \
