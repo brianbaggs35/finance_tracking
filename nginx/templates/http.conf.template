@@ -1,5 +1,5 @@
 server {
-    listen 80;
+    listen 8080;
     server_name _;
 
     # Needed for Let's Encrypt HTTP-01 challenge (if user chooses that method)
