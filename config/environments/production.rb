@@ -24,8 +24,8 @@ Rails.application.configure do
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :local
 
-  # Assume all access to the app is happening through a SSL-terminating reverse proxy.
-  # config.assume_ssl = true
+  # nginx terminates SSL and forwards plain HTTP to Puma on port 3000
+  config.assume_ssl = true
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
