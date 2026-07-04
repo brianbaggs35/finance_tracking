@@ -1,8 +1,11 @@
 #!/bin/bash -e
 
-# If running the rails server then create or migrate existing database
-if [ "${@: -2:1}" == "./bin/rails" ] && [ "${@: -1:1}" == "server" ]; then
+# Ensure shared volume directories exist and are writable
+mkdir -p /etc/letsencrypt/live /etc/letsencrypt/selfsigned /etc/nginx/conf.d
+
+# Prepare the database (creates it if new, runs pending migrations if existing)
+if [[ "$*" == *"rails server"* ]]; then
   ./bin/rails db:prepare
 fi
 
-exec "${@}"
+exec "$@"
