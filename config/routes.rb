@@ -11,6 +11,10 @@ Rails.application.routes.draw do
       get "auth/me",        to: "auth#show"
 
       get "dashboard", to: "dashboard#show"
+
+      get  "setup/status",  to: "setup#status"
+      post "setup/account", to: "setup#create_account"
+      post "setup/ssl",     to: "setup#configure_ssl"
     end
   end
 
