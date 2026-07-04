@@ -1,44 +1,57 @@
 <template>
   <div class="login-page">
-    <Card class="login-card">
-      <template #header>
-        <div class="login-card__header">
-          <h1 class="login-card__title">Template App</h1>
-          <p class="login-card__subtitle">Sign in to your account</p>
-        </div>
-      </template>
+    <div class="login-header">
+      <svg class="login-logo" width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="36" cy="36" r="36" fill="#3b7cf4"/>
+        <polyline points="14,50 26,38 36,43 52,24" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <circle cx="52" cy="24" r="4.5" fill="white"/>
+        <line x1="14" y1="56" x2="58" y2="56" stroke="rgba(255,255,255,0.3)" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <h1 class="login-title">Finance Tracker</h1>
+    </div>
 
+    <Card class="login-card">
       <template #content>
+        <p class="login-subtitle">Sign in to your account</p>
+
         <Message v-if="errorMessage" severity="error" :closable="false" class="login-card__error">
           {{ errorMessage }}
         </Message>
 
         <form class="login-form" @submit.prevent="handleSubmit">
           <div class="login-form__field">
-            <label for="email" class="login-form__label">Email</label>
-            <InputText
-              id="email"
-              v-model="email"
-              type="email"
-              placeholder="you@example.com"
-              autocomplete="email"
-              :invalid="!!errors.email"
-              class="login-form__input"
-            />
+            <IftaLabel>
+              <InputText
+                id="email"
+                v-model="email"
+                type="email"
+                autocomplete="email"
+                :invalid="!!errors.email"
+                fluid
+              />
+              <label for="email">Email</label>
+            </IftaLabel>
             <small v-if="errors.email" class="login-form__error-text">{{ errors.email }}</small>
           </div>
 
           <div class="login-form__field">
-            <label for="password" class="login-form__label">Password</label>
-            <Password
-              input-id="password"
-              v-model="password"
-              :feedback="false"
-              toggle-mask
-              autocomplete="current-password"
-              :invalid="!!errors.password"
-              class="login-form__input"
-            />
+            <IftaLabel>
+              <IconField>
+                <InputText
+                  id="password"
+                  v-model="password"
+                  :type="showPassword ? 'text' : 'password'"
+                  autocomplete="current-password"
+                  :invalid="!!errors.password"
+                  fluid
+                />
+                <InputIcon
+                  :class="showPassword ? 'pi pi-eye-slash' : 'pi pi-eye'"
+                  @click="showPassword = !showPassword"
+                />
+              </IconField>
+              <label for="password">Password</label>
+            </IftaLabel>
             <small v-if="errors.password" class="login-form__error-text">{{ errors.password }}</small>
           </div>
 
@@ -60,7 +73,9 @@ import { ref, reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import Card from 'primevue/card'
 import InputText from 'primevue/inputtext'
-import Password from 'primevue/password'
+import IftaLabel from 'primevue/iftalabel'
+import IconField from 'primevue/iconfield'
+import InputIcon from 'primevue/inputicon'
 import Button from 'primevue/button'
 import Message from 'primevue/message'
 import { useAuthStore } from '@/stores/auth'
@@ -70,6 +85,7 @@ const authStore = useAuthStore()
 
 const email = ref('')
 const password = ref('')
+const showPassword = ref(false)
 const loading = ref(false)
 const errorMessage = ref('')
 const errors = reactive({ email: '', password: '' })
@@ -113,10 +129,31 @@ async function handleSubmit() {
 .login-page {
   min-height: 100vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: var(--p-surface-ground);
+  background: #1a2744;
   padding: 1rem;
+  gap: 1.5rem;
+}
+
+.login-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.login-logo {
+  filter: drop-shadow(0 4px 12px rgba(59, 124, 244, 0.4));
+}
+
+.login-title {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: white;
+  letter-spacing: -0.02em;
 }
 
 .login-card {
@@ -124,22 +161,11 @@ async function handleSubmit() {
   max-width: 420px;
 }
 
-.login-card__header {
-  padding: 2rem 2rem 0;
-  text-align: center;
-}
-
-.login-card__title {
-  margin: 0 0 0.25rem;
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--p-text-color);
-}
-
-.login-card__subtitle {
-  margin: 0;
+.login-subtitle {
+  margin: 0 0 1.5rem;
   color: var(--p-text-muted-color);
   font-size: 0.9rem;
+  text-align: center;
 }
 
 .login-card__error {
@@ -158,14 +184,17 @@ async function handleSubmit() {
   gap: 0.375rem;
 }
 
-.login-form__label {
-  font-weight: 500;
-  font-size: 0.875rem;
-  color: var(--p-text-color);
+.login-form__field :deep(.p-iconfield) {
+  width: 100%;
+  position: relative;
 }
 
-.login-form__input {
-  width: 100%;
+.login-form__field :deep(.p-iconfield .p-inputicon) {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 0.75rem;
+  cursor: pointer;
 }
 
 .login-form__error-text {
