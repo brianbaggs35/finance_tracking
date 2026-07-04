@@ -1,24 +1,68 @@
 <template>
   <div class="login-page">
     <div class="login-header">
-      <svg class="login-logo" width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="36" cy="36" r="36" fill="#3b7cf4"/>
-        <polyline points="14,50 26,38 36,43 52,24" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-        <circle cx="52" cy="24" r="4.5" fill="white"/>
-        <line x1="14" y1="56" x2="58" y2="56" stroke="rgba(255,255,255,0.3)" stroke-width="1.5" stroke-linecap="round"/>
+      <svg
+        class="login-logo"
+        width="72"
+        height="72"
+        viewBox="0 0 72 72"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <circle
+          cx="36"
+          cy="36"
+          r="36"
+          fill="#3b7cf4"
+        />
+        <polyline
+          points="14,50 26,38 36,43 52,24"
+          stroke="white"
+          stroke-width="3.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          fill="none"
+        />
+        <circle
+          cx="52"
+          cy="24"
+          r="4.5"
+          fill="white"
+        />
+        <line
+          x1="14"
+          y1="56"
+          x2="58"
+          y2="56"
+          stroke="rgba(255,255,255,0.3)"
+          stroke-width="1.5"
+          stroke-linecap="round"
+        />
       </svg>
-      <h1 class="login-title">Finance Tracker</h1>
+      <h1 class="login-title">
+        Finance Tracker
+      </h1>
     </div>
 
     <Card class="login-card">
       <template #content>
-        <p class="login-subtitle">Sign in to your account</p>
+        <p class="login-subtitle">
+          Sign in to your account
+        </p>
 
-        <Message v-if="errorMessage" severity="error" :closable="false" class="login-card__error">
+        <Message
+          v-if="errorMessage"
+          severity="error"
+          :closable="false"
+          class="login-card__error"
+        >
           {{ errorMessage }}
         </Message>
 
-        <form class="login-form" @submit.prevent="handleSubmit">
+        <form
+          class="login-form"
+          @submit.prevent="handleSubmit"
+        >
           <div class="login-form__field">
             <IftaLabel>
               <InputText
@@ -31,7 +75,10 @@
               />
               <label for="email">Email</label>
             </IftaLabel>
-            <small v-if="errors.email" class="login-form__error-text">{{ errors.email }}</small>
+            <small
+              v-if="errors.email"
+              class="login-form__error-text"
+            >{{ errors.email }}</small>
           </div>
 
           <div class="login-form__field">
@@ -52,7 +99,10 @@
               </IconField>
               <label for="password">Password</label>
             </IftaLabel>
-            <small v-if="errors.password" class="login-form__error-text">{{ errors.password }}</small>
+            <small
+              v-if="errors.password"
+              class="login-form__error-text"
+            >{{ errors.password }}</small>
           </div>
 
           <Button

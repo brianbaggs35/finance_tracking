@@ -5,15 +5,25 @@
     <main class="dashboard__main">
       <div class="dashboard__content">
         <div class="dashboard__heading">
-          <h2 class="dashboard__title">Dashboard</h2>
-          <p class="dashboard__subtitle">Welcome back, {{ authStore.user?.email }}</p>
+          <h2 class="dashboard__title">
+            Dashboard
+          </h2>
+          <p class="dashboard__subtitle">
+            Welcome back, {{ authStore.user?.email }}
+          </p>
         </div>
 
-        <div v-if="loading" class="dashboard__loading">
+        <div
+          v-if="loading"
+          class="dashboard__loading"
+        >
           <ProgressSpinner />
         </div>
 
-        <div v-else class="dashboard__grid">
+        <div
+          v-else
+          class="dashboard__grid"
+        >
           <Card class="stat-card">
             <template #content>
               <div class="stat-card__body">
@@ -43,7 +53,9 @@
           </Card>
 
           <Card class="dashboard__welcome-card">
-            <template #title>Getting Started</template>
+            <template #title>
+              Getting Started
+            </template>
             <template #content>
               <p>{{ stats?.message }}</p>
               <Divider />

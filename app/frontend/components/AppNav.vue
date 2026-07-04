@@ -1,5 +1,8 @@
 <template>
-  <Menubar :model="menuItems" class="app-nav">
+  <Menubar
+    :model="menuItems"
+    class="app-nav"
+  >
     <template #start>
       <span class="app-nav__brand">Template App</span>
     </template>

@@ -7,15 +7,21 @@
     "type-check": "vue-tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "lint": "eslint app/frontend",
+    "lint:fix": "eslint app/frontend --fix"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@testing-library/vue": "^8.1.0",
     "@types/node": "^26.0.0",
     "@vitest/coverage-v8": "^4.1.9",
     "@vue/test-utils": "^2.4.11",
+    "eslint": "^10.6.0",
+    "eslint-plugin-vue": "^10.9.2",
     "jsdom": "^29.1.1",
     "typescript": "^6.0.3",
+    "typescript-eslint": "^8.62.1",
     "vite": "^8.0.16",
     "vite-plugin-ruby": "^5.2.2",
     "vitest": "^4.1.9",
