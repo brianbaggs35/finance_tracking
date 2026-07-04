@@ -48,6 +48,39 @@ describe('api', () => {
     expect((error as { status: number }).status).toBe(422)
     expect((error as { data: { error: string } }).data.error).toBe('Bad input')
   })
+
+  it('PUT sends the body', async () => {
+    globalThis.fetch = vi.fn().mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve({ ok: true }),
+    })
+
+    await api.put('/test', { name: 'updated' })
+
+    expect(fetch).toHaveBeenCalledWith('/test', expect.objectContaining({ method: 'PUT' }))
+  })
+
+  it('PATCH sends the body', async () => {
+    globalThis.fetch = vi.fn().mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve({ ok: true }),
+    })
+
+    await api.patch('/test', { name: 'patched' })
+
+    expect(fetch).toHaveBeenCalledWith('/test', expect.objectContaining({ method: 'PATCH' }))
+  })
+
+  it('DELETE sends a request', async () => {
+    globalThis.fetch = vi.fn().mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve({ ok: true }),
+    })
+
+    await api.delete('/test')
+
+    expect(fetch).toHaveBeenCalledWith('/test', expect.objectContaining({ method: 'DELETE' }))
+  })
 })
 
 describe('updateCsrfToken', () => {
